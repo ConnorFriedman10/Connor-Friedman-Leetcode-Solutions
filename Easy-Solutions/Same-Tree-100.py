@@ -7,9 +7,22 @@
 
 class Solution(object):
     def isSameTree(self, p, q):
-        """
-        :type p: Optional[TreeNode]
-        :type q: Optional[TreeNode]
-        :rtype: bool
-        """
-        
+        res = [[],[]]
+
+        def inorder(root, idx):
+            if not root:
+                res[idx].append("null")
+                return
+
+            res[idx].append(root.val)
+            inorder(root.left, idx)
+            inorder(root.right, idx)
+
+        inorder(p, 0)
+        inorder(q, 1)
+
+        if res[0] == res[1]:
+            return True
+        return False
+
+#runtime - 0 ms
